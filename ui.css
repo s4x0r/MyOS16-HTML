@@ -1,0 +1,119 @@
+:root{
+    --bg: url('img/wp/14WP-1.png');
+}
+.body{
+    max-width :270px;
+    height: 480px;
+    max-height: 480px;
+
+    background-image: var(--bg);
+    background-position: center;
+    background-size:cover;
+    overflow: hidden;
+    position: relative;
+}
+.screen{
+    max-width :270px;
+    height: 480px;
+    max-height: 480px;
+}
+.float{
+    visibility: hidden;
+    background-color: darkslategray;
+    width: inherit;
+    height: inherit;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+}
+.button{
+    width: 30px;
+    height: 30px;
+    padding:10px;
+    column-gap: 10px;
+    font-size: 2em;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    display: inline-block;
+
+}
+.button p{
+    color: black;
+    position: relative;
+    bottom: 25px;
+    font-size: 15px;
+    color: white;
+    
+}
+
+.button img{
+    visibility: inherit;
+    width: inherit;
+    height: inherit;
+    position: relative;
+}
+
+.appspace{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-auto-rows: 70px;
+    padding: 10px;
+
+}
+.listspace{
+    display: grid;
+    grid-template-columns: auto;
+    grid-auto-rows: 70px;
+    background-color: rgba(128, 128, 128, 0.69);
+    overflow: auto;
+
+}
+.listspace p{
+    border: 2px rgba(64, 64, 64, 0.69);
+}
+.autolist{
+    display :grid;
+    grid-template-columns: auto;
+    grid-auto-rows: auto;
+}
+.autolist p{
+    border: 2px rgba(64, 64, 64, 0.69);
+}
+.listbox{
+    min-height: 70;
+}
+.sublist{
+    display: grid;
+    grid-template-columns: auto;
+
+}
+.commandbar{
+    grid-column: 1 / span 4;
+    grid-row: 1;
+    display: flex;
+    height: auto;
+    background-color: rgba(128, 128, 128, 0.69);
+    padding: 10px;
+    margin : 10px;
+    border-radius: 15px;
+
+}
+.commandbar .text{
+   width: 90%;
+    flex: 1;
+
+}
+.bottombar{
+    grid-column: 1 / span 4;
+    grid-row: 6;
+    height: 70px;
+    width: inherit;
+    margin : 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-auto-rows: 70px;
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.69);
+    border-radius: 15px;
+}
