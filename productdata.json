@@ -1,0 +1,13 @@
+{
+    "mp14":{
+        "prodID":"",
+        "settings":[
+            "wallpapers",
+            "resize",
+            "colors"
+        ],
+        "wallpapers":[
+            {"name":"","key":""}
+        ]
+    }
+}
