@@ -1,7 +1,7 @@
 :root{
     --bg: url('img/wp/14WP-1.png');
 }
-.body{
+.background{
     max-width :270px;
     height: 480px;
     max-height: 480px;
