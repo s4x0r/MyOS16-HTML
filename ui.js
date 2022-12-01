@@ -17,8 +17,13 @@ $(document).ready(function() {
         if (key === "Enter") {
             //alert(node.value);
             if(node.value.startsWith('cmd:')){
-                send(node.value.slice(4));
-                node.value = '';
+                if(node.value.slice(4).startsWith('dev:')){
+                    send(localStorage.getItem('devid')+node.value.slice(8));
+                    node.value = '';
+                }else{
+                    send(node.value.slice(4));
+                    node.value = '';
+                }
             }else{
                 window.parent.location.href="https://www.google.com/search?q="+encodeURIComponent(node.value);
             }
@@ -101,19 +106,79 @@ function setWP(wp){
     localStorage.setItem(localStorage.getItem('devkey')+'wp', wp);
 }
 
-function genlist(){
-
+function genlist(list){
+    $("#dynamiclist").innerHtml='';
+    for(let i in list){
+        $('#dynamiclist').innerHtml+=
+        `<p data-string="${i['data']}" onclick="${i['action']}">${i['title']}</p>`;
+    }
 }
 
 
-function init(){
+async function getwp(){
+    var loc = `devices/${localStorage.getItem('devid')}.json`
+    var data = await fetch(loc).then((response)=>response.json());
+
+    var list=[];
+    for(let i in data['wallpapers']){
+        list+=[{
+            'title':i['name'],
+            'data':`${localStorage.getItem('devkey')}:util:texture:${i['key']}`, 
+            'action':"send(this.getAttribute('data-string')); setWP(this.innerText);"
+        }];
+    }
+    list+=[{
+        'title':'Back',
+        'data':'', 
+        'action':"show('settings');"
+    }];
+    genlist(list);
+    show('dynamiclist');
+}
+
+async function getdevices(){
+    const page =$("#devices");
+    page.innerHtml=";"
+    const options = {
+        method: 'POST',
+        body: "hud:devices:get",
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+    var data = await fetch(window.parent.location.href, options).then((response)=>response.json());
+    for(let i in data){
+        page.innerHtml+=`
+        <div class="button" 
+            onclick="localStorage.setItem('devkey', ${i['key']});
+                localStorage.setItem('devname', ${i['name']});
+                localStorage.setItem('devid', ${i['id']});
+                init();"
+        >
+            <img src="img/settings_cog_gear.png"/>
+            <p>${i['name']}</p>
+        </div>`;
+    }
+    page.innerHtml+=`
+    <div class="button" onclick="show('home');">
+        <img src="img/settings_cog_gear.png"/>
+        <p>Back</p>
+    </div>`;
+    show('devices');
+
+}
+
+async function init(){
     if(localStorage.getItem('devkey')===null){
         show(devices);
         return
     }
     var wp = localStorage.getItem(localStorage.getItem('devkey')+'wp')
     if(wp===null){
-        var data = JSON.parse(getFile('devices/'+localStorage.getItem('devid')+'.json'));
+        var loc = `devices/${localStorage.getItem('devid')}.json`
+        var data = await fetch(loc).then((response)=>response.json());
+        if(data['settings'].indexOf('wallpapers')==-1){show('home');return;}
         wp = data['wallpapers'][0]['name'];
     }
     setWP(wp);
@@ -121,34 +186,3 @@ function init(){
     show('home');
 }
 
-function switchdevice(devname, devkey, devid){
-    localStorage.setItem('devkey', devkey);
-    localStorage.setItem('devname', devname);
-    localStorage.setItem('devid', devid);
-
-    init();
-}
-
-function makeDevice(device){
-
-
-
-
-    let dev = `
-        <div class="button" onclick="switchdevice('${devname}','${devkey}')">
-            <img src="img/settings_cog_gear.png"/>
-            <p>${devname}</p>
-        </div>
-    `;
-    
-    
-    return dev;
-}
-
-function gendevices(devices){
-    const page =$("#devicepage");
-    page.innerHtml="";
-    devices.forEach(function(){
-        page.innerHtml+="";
-    });
-}

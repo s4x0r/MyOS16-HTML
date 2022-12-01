@@ -1,0 +1,19 @@
+{
+    "prodID":"mp14",
+    "settings":[
+        "wallpapers",
+        "resize",
+        "colors"
+    ],
+    "wallpapers":[
+        {"name":"14WP-1","key":"d5c57d25-9f9c-c99e-8007-aee26d5832cd"},
+        {"name":"14WP-2","key":"01583bba-793c-137c-f992-71096887efa2"},
+        {"name":"14WP-3","key":"b748fd0c-db57-173f-01d7-8a9ebc41ac39"},
+        {"name":"14WP-4","key":"d2f8612a-3974-6d60-1344-d933a71b439d"},
+        {"name":"14WP-5","key":"9d10ca46-0f7e-8e89-0ecf-14b219b98cac"},
+        {"name":"14WP-6","key":"5ed348d2-313b-49c2-b5ee-252b0b68dcbb"},
+        {"name":"14WP-7","key":"2450b09e-4900-7c97-267c-1246e5d60d43"},
+        {"name":"14WP-8","key":"2cf1c784-12a7-080e-060d-144ec64f621f"},
+        {"name":"14WP-9","key":"7b39cfcc-feb3-e535-a48d-4573da8024d4"}
+    ]
+}
