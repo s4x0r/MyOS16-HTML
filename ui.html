@@ -17,7 +17,7 @@
 </head>
 <body>
     <div class="background" onload="show('home')" data-string="">
-        <div id="curdevice" data-string="" style="display: none;"></div>
+    
         <div id="settings" class="listspace screen">
             <p onclick="show('wallpapers')">Wallpaper</p>
             <p onclick="show('colors')">Case Color</p>
@@ -112,6 +112,23 @@
 
         </div>
 
+        <div id="resize" class="screen appspace">
+            <input type="range" id="size" 
+                min="0" max="1000" 
+                style="grid-column: 1/span 3;" 
+                onchange="document.getElementById('sizeDisplay').innerText=this.value/100;"
+            >
+            <div id="sizeDisplay" style="grid-column: 1/span 3;">none</div>
+            <div class="button" onclick="setSize(document.getElementById('size').value)">
+                <img src="img/settings_cog_gear.png"/>
+                <p>Set size</p>
+            </div>
+            <div class="button" onclick="show('settings')">
+                <img src="img/settings_cog_gear.png"/>
+                <p>Back</p>
+            </div>
+
+        </div>
     </div>
 </body>
 <footer>

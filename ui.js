@@ -74,22 +74,6 @@ function get(location, callback){
     
 }
 
-async function getFile(location) {
-    let myPromise = new Promise(function(resolve) {
-      let req = new XMLHttpRequest();
-      req.open('GET', location);
-      req.onload = function() {
-        if (req.status == 200) {
-          resolve(req.response);
-        } else {
-          resolve("File not Found");
-        }
-      };
-      req.send();
-    });
-    return await myPromise;
-  }
-
 function show(display){
     for(let i = 0; i<document.getElementsByClassName('screen').length; i++){
         document.getElementsByClassName('screen')[i].style.display='none';
@@ -104,6 +88,14 @@ function setWP(wp){
     var r = document.querySelector(':root');
     r.style.setProperty('--bg', 'url("img/wp/'+wp+'.png")');
     localStorage.setItem(localStorage.getItem('devkey')+'wp', wp);
+}
+function setSize(size){
+    //let size =localStorage.getItem(localStorage.getItem('devkey')+'size');
+    if(size === null){
+
+    }else{}
+    localStorage.setItem(localStorage.getItem('devkey')+'size', size);
+    send(`${localStorage.getItem('devkey')}:util:resize:${size/100}`);
 }
 
 function genlist(list){
@@ -144,7 +136,7 @@ async function getdevices(){
         body: "hud:devices:get",
         headers: {
           'Content-Type': 'application/json'
-        }
+        }      
       }
 
     var data = await fetch(window.parent.location.href, options).then((response)=>response.json());
@@ -169,7 +161,7 @@ async function getdevices(){
 
 }
 
-async function init(){
+async function init(){//innit bruv?
     if(localStorage.getItem('devkey')===null){
         show(devices);
         return
