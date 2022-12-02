@@ -9,7 +9,7 @@ $(document).ready(function() {
     });
     
     $("#mycolor").on("change.color", function(event, color){
-        send(localStorage.getItem('devkey')+":color:"+color);
+        send(getKey()+":color:"+color);
     });
 
     const node = document.getElementById('cmdbar');
@@ -18,7 +18,7 @@ $(document).ready(function() {
             //alert(node.value);
             if(node.value.startsWith('cmd:')){
                 if(node.value.slice(4).startsWith('dev:')){
-                    send(localStorage.getItem('devid')+node.value.slice(8));
+                    send(getKey()+node.value.slice(8));
                     node.value = '';
                 }else{
                     send(node.value.slice(4));
@@ -32,105 +32,129 @@ $(document).ready(function() {
         }   
     });
 
-    show('home');
+    init();
 });
 
+function getKey(){//shorthand for getting active device key
+    return localStorage.getItem(localStorage.getItem('devkey'));
+}
+function getKey(name){//getkey()+name
+    return localStorage.getItem(localStorage.getItem('devkey')+name);
+}
+
+async function init(){//innit bruv?
+    if(getKey()===null){
+        show('devices');
+        return;
+    }
+    //set wallpaper
+    var wp = getKey('wp');
+    if(wp===null){
+        var loc = `devices/${localStorage.getItem('devid')}.json`;
+        var data = await fetch(loc).then((response)=>response.json());
+        //if(data['settings'].indexOf('wallpapers')==-1){show('home');return;}
+        wp = data['wallpapers'][0]['name'];
+    }
+    setWP(wp);
+    
+    //set scale
+    if(getKey('size')===null){
+        $('#size').val(0);
+    }else{
+        $('#size').val(getKey('size'));
+    }
+
+
+    //get product data
+    var data;
+    if(getKey()==="<key>"){//developer mode
+        data={
+            "prodID":"test",
+            "settings":[
+                "wallpapers",
+                "resize",
+                "colors"
+            ],
+            "wallpapers":[
+                {"name":"14WP-1","key":"d5c57d25-9f9c-c99e-8007-aee26d5832cd"},
+                {"name":"14WP-2","key":"01583bba-793c-137c-f992-71096887efa2"}
+            ]
+        };
+    }else{
+        var loc = `devices/${localStorage.getItem('devid')}.json`
+        data = await fetch(loc).then((response)=>response.json());
+    }
+
+    //build settings page
+    let out = '';
+    for(let i in data['settings']){
+        out +=`<p onclick="show('${i}')">${i}</p>`;
+    }
+    out+=`<p onclick="show('home')">Back</p>`;
+    $('#settings').html(out)
+
+    //build wallpapers page
+    out='';
+    for(let i in data['wallpapers']){
+        out+= `<p 
+            data-string="${getKey()}:util:texture:${i['key']}" 
+            onclick="send(this.getAttribute('data-string')); setWP(this.innerText);">
+            ${i['name']}
+        </p>`;
+
+    }
+    out+= `<p 
+        onclick="show(settings);">
+        Back
+    </p>`;
+    $("#wallpapers").html(out);
+
+    //done
+    show('home');
+}
+
+
 function send(data){
-    //window.parent.postMessage(data, '*');
-    //document.getElementById('display').innerText=data;
     console.log(data)
 
+    if(data.startsWith('dev:')){data=getKey()+data.slice(4);}
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', window.parent.location.href, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(data); 
-    
 }
 
-function send(data, callback){
-    console.log(data)
-    var xhr = new XMLHttpRequest();
-    xhr.onload=function(){
-        console.log(xhr.responseText)
-        callback(xhr.responseText)
-    }
-    xhr.open('POST', window.parent.location.href, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(data); 
-    
-}
-
-function get(location, callback){
-    //console.log(data)
-    var xhr = new XMLHttpRequest();
-    xhr.onload=function(){
-        console.log(xhr.responseText)
-        callback(xhr.responseText)
-    }
-    xhr.open('GET', location, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.get(); 
-    
-}
 
 function show(display){
     for(let i = 0; i<document.getElementsByClassName('screen').length; i++){
         document.getElementsByClassName('screen')[i].style.display='none';
         }
-    //document.getElementById('home').style.display='none';
-    //document.getElementById('settings').style.display='none';
-
     document.getElementById(display).style.display='';
 }
 
 function setWP(wp){
     var r = document.querySelector(':root');
     r.style.setProperty('--bg', 'url("img/wp/'+wp+'.png")');
-    localStorage.setItem(localStorage.getItem('devkey')+'wp', wp);
+    localStorage.setItem(getKey()+'wp', wp);
 }
 function setSize(size){
-    //let size =localStorage.getItem(localStorage.getItem('devkey')+'size');
-    if(size === null){
-
-    }else{}
-    localStorage.setItem(localStorage.getItem('devkey')+'size', size);
-    send(`${localStorage.getItem('devkey')}:util:resize:${size/100}`);
+    localStorage.setItem(getKey()+'size', size);
+    send(`${getKey()}:util:resize:${Math.pow(2,this.value/100).toFixed(2)}`);
 }
 
 function genlist(list){
-    $("#dynamiclist").innerHtml='';
+    var out = ''
     for(let i in list){
-        $('#dynamiclist').innerHtml+=
+        out+=
         `<p data-string="${i['data']}" onclick="${i['action']}">${i['title']}</p>`;
     }
+    $("#dynamiclist").html(out);
 }
 
-
-async function getwp(){
-    var loc = `devices/${localStorage.getItem('devid')}.json`
-    var data = await fetch(loc).then((response)=>response.json());
-
-    var list=[];
-    for(let i in data['wallpapers']){
-        list+=[{
-            'title':i['name'],
-            'data':`${localStorage.getItem('devkey')}:util:texture:${i['key']}`, 
-            'action':"send(this.getAttribute('data-string')); setWP(this.innerText);"
-        }];
-    }
-    list+=[{
-        'title':'Back',
-        'data':'', 
-        'action':"show('settings');"
-    }];
-    genlist(list);
-    show('dynamiclist');
-}
 
 async function getdevices(){
-    const page =$("#devices");
-    page.innerHtml=";"
+    let out = '';
     const options = {
         method: 'POST',
         body: "hud:devices:get",
@@ -141,7 +165,7 @@ async function getdevices(){
 
     var data = await fetch(window.parent.location.href, options).then((response)=>response.json());
     for(let i in data){
-        page.innerHtml+=`
+        out+=`
         <div class="button" 
             onclick="localStorage.setItem('devkey', ${i['key']});
                 localStorage.setItem('devname', ${i['name']});
@@ -152,29 +176,15 @@ async function getdevices(){
             <p>${i['name']}</p>
         </div>`;
     }
-    page.innerHtml+=`
+    out+=`
     <div class="button" onclick="show('home');">
         <img src="img/settings_cog_gear.png"/>
         <p>Back</p>
     </div>`;
+
+    $("#devices").html(out);
     show('devices');
 
 }
 
-async function init(){//innit bruv?
-    if(localStorage.getItem('devkey')===null){
-        show(devices);
-        return
-    }
-    var wp = localStorage.getItem(localStorage.getItem('devkey')+'wp')
-    if(wp===null){
-        var loc = `devices/${localStorage.getItem('devid')}.json`
-        var data = await fetch(loc).then((response)=>response.json());
-        if(data['settings'].indexOf('wallpapers')==-1){show('home');return;}
-        wp = data['wallpapers'][0]['name'];
-    }
-    setWP(wp);
-
-    show('home');
-}
 

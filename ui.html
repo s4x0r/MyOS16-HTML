@@ -17,7 +17,10 @@
 </head>
 <body>
     <div class="background" onload="show('home')" data-string="">
-    
+        
+        <div id="dynamiclist" class="listspace screen">
+
+        </div>
         <div id="settings" class="listspace screen">
             <p onclick="show('wallpapers')">Wallpaper</p>
             <p onclick="show('colors')">Case Color</p>
@@ -114,9 +117,9 @@
 
         <div id="resize" class="screen appspace">
             <input type="range" id="size" 
-                min="0" max="1000" 
+                min="-300" max="300" 
                 style="grid-column: 1/span 3;" 
-                onchange="document.getElementById('sizeDisplay').innerText=this.value/100;"
+                onchange="document.getElementById('sizeDisplay').innerText=Math.pow(2,this.value/100).toFixed(2);"
             >
             <div id="sizeDisplay" style="grid-column: 1/span 3;">none</div>
             <div class="button" onclick="setSize(document.getElementById('size').value)">
