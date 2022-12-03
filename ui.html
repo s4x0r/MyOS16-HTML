@@ -70,31 +70,32 @@
         </div>
         <div id="devices" class="appspace screen">
 
-        <div class="button" onclick="show('home')">
-            <img src="img/icon/empty_curved_arrow_left.png">
-            <p>Back</p>
-        </div>
+            <div class="button" onclick="show('home')">
+                <img src="img/icon/empty_curved_arrow_left.png">
+                <p>Back</p>
+            </div>
 
-        <div class="button" onclick="
-            send('hud:devices:identify');
-            setTimeout(getDevices, 5000);">
-            <img src="img/icon/empty_curved_arrows_sync_refresh.png">
-            <p>Refresh</p>
-        </div>
+            <div class="button" onclick="
+                send('hud:devices:identify');
+                setTimeout(getDevices, 5000);">
+                <img src="img/icon/empty_curved_arrows_sync_refresh.png">
+                <p>Refresh</p>
+            </div>
 
-        <div class="scrollbox" style="
-            grid-column: 1/span 4;
-            grid-row: 2/span 5;
-            background: gray;
-            overflow-y: auto;
-            ">
-            <div id="deviceContainer" 
-                style="display: grid;
-                grid-template-columns: auto auto auto;
-                grid-auto-rows: 70px;"
-            >
+            <div class="scrollbox" style="
+                grid-column: 1/span 4;
+                grid-row: 2/span 5;
+                background: gray;
+                overflow-y: auto;
+                ">
+                <div id="deviceContainer" 
+                    style="display: grid;
+                    grid-template-columns: auto auto auto;
+                    grid-auto-rows: 70px;"
+                >
 
 
+                </div>
             </div>
         </div>
 </body>
