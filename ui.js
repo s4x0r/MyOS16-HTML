@@ -1,6 +1,9 @@
+var hudURL;
+
 
 window.addEventListener('message', (event) => {         
     console.log(event.data);
+    hudURL=event.data;
 }, false);
 
 $(document).ready(function() {
@@ -127,7 +130,7 @@ function send(data){
     if(data.startsWith('dev:')){data=getKey()+data.slice(4);}
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', window.parent.location.href, true);
+    xhr.open('POST', hudURL, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(data); 
 }
@@ -161,7 +164,7 @@ async function getDevices(){
         }      
     }
 
-    var data = await fetch(window.parent.location.href, options).then((response)=>response.json());
+    var data = await fetch(hudURL, options).then((response)=>response.json());
     for(let i in data){
         $("#deviceContainer").append(makeApp(
             i['name'],
