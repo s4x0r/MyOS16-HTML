@@ -63,7 +63,7 @@
                 <p>Set size</p>
             </div>
             <div class="button" onclick="show('home')">
-                <img src="img/icon/settings_cog_gear.png"/>
+                <img src="img/icon/empty_curved_arrow_left.png"/>
                 <p>Back</p>
             </div>
 
@@ -71,12 +71,14 @@
         <div id="devices" class="appspace screen">
 
         <div class="button" onclick="show('home')">
-            <img src="img/icon/settings_cog_gear.png">
+            <img src="img/icon/empty_curved_arrow_left.png">
             <p>Back</p>
         </div>
 
-        <div class="button" onclick="getDevices();">
-            <img src="img/icon/settings_cog_gear.png">
+        <div class="button" onclick="
+            send('hud:devices:identify');
+            setTimeout(getDevices, 5000);">
+            <img src="img/icon/empty_curved_arrows_sync_refresh.png">
             <p>Refresh</p>
         </div>
 
