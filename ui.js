@@ -158,6 +158,7 @@ async function getDevices(){
     $("#deviceContainer").empty($(".button"));
     const options = {
         method: 'POST',
+        mode: "cors",
         body: "hud:devices:get",
         headers: {
           'Content-Type': 'application/json'
