@@ -3,7 +3,7 @@ var hudURL;
 
 window.addEventListener('message', (event) => {         
     console.log(event.data);
-    hudURL="http://"+event.data;
+    hudURL=event.data;
 }, false);
 
 $(document).ready(function() {
