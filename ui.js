@@ -26,7 +26,7 @@ $(document).ready(function() {
             
         }   
     });
-
+    send('hud:ready');
     init();
 });
 
