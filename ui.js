@@ -17,13 +17,8 @@ $(document).ready(function() {
         if (key === "Enter") {
             //alert(node.value);
             if(node.value.startsWith('cmd:')){
-                if(node.value.slice(4).startsWith('dev:')){
-                    send(getKey()+node.value.slice(8));
-                    node.value = '';
-                }else{
-                    send(node.value.slice(4));
-                    node.value = '';
-                }
+                send(node.value.slice(4));
+                node.value = '';
             }else{
                 window.parent.location.href="https://www.google.com/search?q="+encodeURIComponent(node.value);
             }
@@ -40,6 +35,16 @@ function getKey(){//shorthand for getting active device key
 }
 function getKey(name){//getkey()+name
     return localStorage.getItem(localStorage.getItem('devkey')+name);
+}
+
+function makeApp(name, icon, action){
+    return `
+    <div class="button dynamic" 
+        onclick="${action}"
+    >
+        <img src="img/icon/${icon}"/>
+        <p>${name}</p>
+    </div>`;
 }
 
 async function init(){//innit bruv?
@@ -70,10 +75,19 @@ async function init(){//innit bruv?
     if(getKey()==="<key>"){//developer mode
         data={
             "prodID":"test",
-            "settings":[
-                "wallpapers",
-                "resize",
-                "colors"
+            "apps":[
+                {"name":"Wallpapers",
+                "icon":"",
+                "action":"show('wallpapers');"
+                },
+                {"name":"Resize",
+                "icon":"",
+                "action":"show('resize');"
+                },
+                {"name":"Colors",
+                "icon":"",
+                "action":"show('colors');"
+                }
             ],
             "wallpapers":[
                 {"name":"14WP-1","key":"d5c57d25-9f9c-c99e-8007-aee26d5832cd"},
@@ -85,29 +99,22 @@ async function init(){//innit bruv?
         data = await fetch(loc).then((response)=>response.json());
     }
 
-    //build settings page
-    let out = '';
-    for(let i in data['settings']){
-        out +=`<p onclick="show('${i}')">${i}</p>`;
+    //make apps
+    $("#home").empty($(".dynamic"));
+    for(i in data['apps']){
+        $("#home").append(makeApp(i["name"], i["icon"], i["action"]));
     }
-    out+=`<p onclick="show('home')">Back</p>`;
-    $('#settings').html(out)
+    
 
     //build wallpapers page
-    out='';
+    $("#wallpapers").empty(".dynamic");
     for(let i in data['wallpapers']){
-        out+= `<p 
+        $("#wallpapers").append(`<p class="dynamic"
             data-string="${getKey()}:util:texture:${i['key']}" 
             onclick="send(this.getAttribute('data-string')); setWP(this.innerText);">
             ${i['name']}
-        </p>`;
-
+        </p>`);
     }
-    out+= `<p 
-        onclick="show(settings);">
-        Back
-    </p>`;
-    $("#wallpapers").html(out);
 
     //done
     show('home');
@@ -143,48 +150,31 @@ function setSize(size){
     send(`${getKey()}:util:resize:${Math.pow(2,this.value/100).toFixed(2)}`);
 }
 
-function genlist(list){
-    var out = ''
-    for(let i in list){
-        out+=
-        `<p data-string="${i['data']}" onclick="${i['action']}">${i['title']}</p>`;
-    }
-    $("#dynamiclist").html(out);
-}
 
-
-async function getdevices(){
-    let out = '';
+async function getDevices(){
+    $("#deviceContainer").empty($(".button"));
     const options = {
         method: 'POST',
         body: "hud:devices:get",
         headers: {
           'Content-Type': 'application/json'
         }      
-      }
+    }
 
     var data = await fetch(window.parent.location.href, options).then((response)=>response.json());
     for(let i in data){
-        out+=`
-        <div class="button" 
-            onclick="localStorage.setItem('devkey', ${i['key']});
+        $("#deviceContainer").append(makeApp(
+            i['name'],
+            "icon",
+            `localStorage.setItem('devkey', ${i['key']});
                 localStorage.setItem('devname', ${i['name']});
                 localStorage.setItem('devid', ${i['id']});
-                init();"
-        >
-            <img src="img/settings_cog_gear.png"/>
-            <p>${i['name']}</p>
-        </div>`;
+                init();
+            `
+        ));
     }
-    out+=`
-    <div class="button" onclick="show('home');">
-        <img src="img/settings_cog_gear.png"/>
-        <p>Back</p>
-    </div>`;
 
-    $("#devices").html(out);
     show('devices');
-
 }
 
 

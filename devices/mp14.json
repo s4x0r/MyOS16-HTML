@@ -1,9 +1,38 @@
 {
     "prodID":"mp14",
-    "settings":[
-        "wallpapers",
-        "resize",
-        "colors"
+    "apps":[
+        {"name":"Wallpapers",
+        "icon":"",
+        "action":"show('wallpapers');"
+        },
+        {"name":"Resize",
+        "icon":"thin_arrows_fullscreen_directions_full_screen.png",
+        "action":"show('resize');"
+        },
+        {"name":"Colors",
+        "icon":"",
+        "action":"show('colors');"
+        },
+        {"name":"Toggle Idle AO",
+        "icon":"sand_clock_time.png",
+        "action":"send('dev:ao:toggle idle');"
+        },
+        {"name":"Toggle Typing AO",
+        "icon":"smart_phone_iphone_message.png",
+        "action":"send('dev:ao:toggle typing');"
+        },
+        {"name":"Toggle Sounds",
+        "icon":"speaker_audio_sound_loud.png",
+        "action":"send('dev:ao:sounds');"
+        },
+        {"name":"Toggle Phone",
+        "icon":"view_eye.png",
+        "action":"send('dev:util:visibility:toggle');"
+        },
+        {"name":"Take Selfie",
+        "icon":"photo_camera_photocamera.png",
+        "action":"send('dev:ao:pose');"
+        }
     ],
     "wallpapers":[
         {"name":"14WP-1","key":"d5c57d25-9f9c-c99e-8007-aee26d5832cd"},

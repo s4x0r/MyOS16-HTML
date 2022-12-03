@@ -18,50 +18,13 @@
 <body>
     <div class="background" onload="show('home')" data-string="">
         
-        <div id="dynamiclist" class="listspace screen">
-
-        </div>
-        <div id="settings" class="listspace screen">
-            <p onclick="show('wallpapers')">Wallpaper</p>
-            <p onclick="show('colors')">Case Color</p>
-            <p onclick="show('resize')">Resize Phone</p>
-            <p onclick="show('home')">Back</p>
-        </div>
-
         <div id="wallpapers" class="listspace screen">
-            <p data-string="phone:util:texture:d5c57d25-9f9c-c99e-8007-aee26d5832cd" 
-                onclick="send(this.getAttribute('data-string')); setWP(this.innerText);"
-            >14WP-1</p>
-            <p data-string="phone:util:texture:01583bba-793c-137c-f992-71096887efa2" 
-                onclick="send(this.getAttribute('data-string')); setWP(this.innerText);"
-            >14WP-2</p>
-            <p data-string="phone:util:texture:b748fd0c-db57-173f-01d7-8a9ebc41ac39" 
-                onclick="send(this.getAttribute('data-string')); setWP(this.innerText);"
-            >14WP-3</p>
-            <p  data-string="phone:util:texture:d2f8612a-3974-6d60-1344-d933a71b439d" 
-                onclick="send(this.getAttribute('data-string')); setWP(this.innerText);"
-            >14WP-4</p>
-            <p data-string="phone:util:texture:9d10ca46-0f7e-8e89-0ecf-14b219b98cac" 
-                onclick="send(this.getAttribute('data-string')); setWP(this.innerText);"
-            >14WP-5</p>
-            <p  data-string="phone:util:texture:5ed348d2-313b-49c2-b5ee-252b0b68dcbb" 
-                onclick="send(this.getAttribute('data-string')); setWP(this.innerText);"
-            >14WP-6</p>
-            <p data-string="phone:util:texture:2450b09e-4900-7c97-267c-1246e5d60d43" 
-                onclick="send(this.getAttribute('data-string')); setWP(this.innerText);"
-            >14WP-7</p>
-            <p data-string="phone:util:texture:2cf1c784-12a7-080e-060d-144ec64f621f" 
-                onclick="send(this.getAttribute('data-string')); setWP(this.innerText);"
-            >14WP-8</p>
-            <p data-string="phone:util:texture:7b39cfcc-feb3-e535-a48d-4573da8024d4" 
-                onclick="send(this.getAttribute('data-string')); setWP(this.innerText);"
-            >14WP-9</p>
-            <p onclick="show('settings')">Back</p>
+            <p onclick="show('home')">Back</p>
         </div>
 
         <div id ="colors" class="autolist screen" >
             <div style="width:100px;" id="mycolor" ></div>
-            <p onclick="show('settings')">Back</p>
+            <p onclick="show('home')">Back</p>
 
         </div>
 
@@ -69,50 +32,23 @@
             <div class="commandbar">
                 <input type="text" class="text" id="cmdbar">
             </div>
-            <div class="button" onclick="show('settings')">
-                <img src="img/settings_cog_gear.png"/>
-                <p>Settings</p>
-            </div>
-            <div class="button" data-string="phone:ao:toggle idle" onclick="send(this.getAttribute('data-string'))">
-                <img src="img/sand_clock_time.png"/>
-                <p>Toggle Idle Animations</p>
-            </div>
-            <div class="button" data-string="phone:ao:toggle typing" onclick="send(this.getAttribute('data-string'))">
-                <img src="img/smart_phone_iphone_message.png"/>
-                <p>Toggle Typing AO</p>
-            </div>
-            <div class="button" data-string="phone:ao:sounds" onclick="send(this.getAttribute('data-string'))">
-                <img src="img/speaker_audio_sound_loud.png"/>
-                <p>Toggle Sound</p>
-            </div>
-            <div class="button" data-string="phone:util:visibility:toggle " onclick="send(this.getAttribute('data-string'))">
-                <img src="img/view_eye.png"/>
-                <p>Toggle Phone</p>
-            </div>
-            <div class="button" onclick="show('resize');">
-                <img src="img/thin_arrows_fullscreen_directions_full_screen.png"/>
-                <p>Resize Phone</p>
-            </div>
 
             <div class="bottombar">
-                <div class="button" data-string="web" onclick="send(this.getAttribute('data-string'))">
-                    <img src="img/globe_web_browser.png"/>
+                <div class="button" onclick="window.parent.location.href='google.com';">
+                    <img src="img/icon/globe_web_browser.png"/>
                     <p>Web</p>
                 </div>
-                <div class="button" data-string="chat" onclick="send(this.getAttribute('data-string'))">
-                    <img src="img/chats_chat_sms_talk.png"/>
+                <div class="button" onclick="console.log('chat');">
+                    <img src="img/icon/chats_chat_sms_talk.png"/>
                     <p>Chat</p>
                 </div>
-                <div class="button" data-string="watch" onclick="send(this.getAttribute('data-string'))">
-                    <img src="img/iwatch_smart_watch.png"/>
-                    <p>My Watch</p>
+                <div class="button" onclick="show('devices');">
+                    <img src="img/icon/tablet_smart_phone.png"/>
+                    <p>Devices</p>
                 </div>
-                <div class="button" data-string="phone:ao:pose" onclick="send(this.getAttribute('data-string'))">
-                    <img src="img/photo_camera_photocamera.png"/>
-                    <p>Camera</p>
+
                 </div>
             </div>
-
         </div>
 
         <div id="resize" class="screen appspace">
@@ -123,16 +59,42 @@
             >
             <div id="sizeDisplay" style="grid-column: 1/span 3;">none</div>
             <div class="button" onclick="setSize(document.getElementById('size').value)">
-                <img src="img/settings_cog_gear.png"/>
+                <img src="img/icon/settings_cog_gear.png"/>
                 <p>Set size</p>
             </div>
-            <div class="button" onclick="show('settings')">
-                <img src="img/settings_cog_gear.png"/>
+            <div class="button" onclick="show('home')">
+                <img src="img/icon/settings_cog_gear.png"/>
                 <p>Back</p>
             </div>
 
         </div>
-    </div>
+        <div id="devices" class="appspace screen">
+
+        <div class="button" onclick="show('home')">
+            <img src="img/icon/settings_cog_gear.png">
+            <p>Back</p>
+        </div>
+
+        <div class="button" onclick="getDevices();">
+            <img src="img/icon/settings_cog_gear.png">
+            <p>Refresh</p>
+        </div>
+
+        <div class="scrollbox" style="
+            grid-column: 1/span 4;
+            grid-row: 2/span 5;
+            background: gray;
+            overflow-y: auto;
+            ">
+            <div id="deviceContainer" 
+                style="display: grid;
+                grid-template-columns: auto auto auto;
+                grid-auto-rows: 70px;"
+            >
+
+
+            </div>
+        </div>
 </body>
 <footer>
 
