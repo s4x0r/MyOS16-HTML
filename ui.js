@@ -61,6 +61,7 @@ function makeApp(name, icon, action){
 }
 
 async function init(){//innit bruv?
+    console.log(localStorage)
     console.log(getKey());
     if(getKey()===null){
         show('devices');
