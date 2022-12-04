@@ -13,17 +13,12 @@
 
             var xhr = new XMLHttpRequest();
             xhr.onload=function(){
-                document.getElementById("frame").contentWindow.postMessage(this.responseText, "*")
+                document.getElementById('frame').contentWindow.postMessage(this.responseText, '*')
             };
 
             xhr.open('POST', window.location.href, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(event.data); 
-            
-            
-            
-
-    
         }, false);
     </script>
 </head>

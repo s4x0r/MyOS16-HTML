@@ -168,14 +168,10 @@ function setSize(size){
 
 async function getDevices(){
     $("#deviceContainer").empty($(".button"));
-    const options = {
-        method: 'POST',
-        body: "hud:devices:get",
-        headers: {
-          'Content-Type': 'application/json'
-        }      
-    }
+
+    send('hud:devices:get');
     var data = await getPromiseFromEvent(window, 'message')
+    console.log(data)
     //var data = await fetch(hudURL, options).then((response)=>response.json());
     for(let i in data){
         $("#deviceContainer").append(makeApp(
