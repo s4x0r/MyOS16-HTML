@@ -90,7 +90,7 @@ async function init(){//innit bruv?
         var loc = `devices/${localStorage.getItem('devid')}.json`
         data = await fetch(loc).then((response)=>response.json());
     }
-
+    console.log(data);
     //set wallpaper
     var wp = localStorage.getItem(localStorage.getItem('devkey')+'wp');
     if(wp===null){
