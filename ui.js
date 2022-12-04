@@ -173,6 +173,7 @@ async function getDevices(){
     console.log(data);
     //var data = await fetch(hudURL, options).then((response)=>response.json());
     for(let i in data){
+        console.log(i);
         $("#deviceContainer").append(makeApp(
             i.name,
             "icon",
