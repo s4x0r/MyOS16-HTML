@@ -120,7 +120,7 @@ async function init(){//innit bruv?
     $("#wallpapers .dynamic").remove();
     for(let i in data.wallpapers){
         $("#wallpapers").append(`<p class="dynamic"
-            onclick="send("dev:util:texture:${data.wallpapers[i].key}"); setWP(this.innerText);">
+            onclick="send('dev:util:texture:${data.wallpapers[i].key}'); setWP(this.innerText);">
             ${data.wallpapers[i].name}
         </p>`);
     }
