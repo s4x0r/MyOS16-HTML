@@ -44,7 +44,7 @@ $(document).ready(function() {
 });
 
 function getKey(){//shorthand for getting active device key
-    return localStorage.getItem(localStorage.getItem('devkey'));
+    localStorage.getItem('devkey');
 }
 function getKey(name){//getkey()+name
     return localStorage.getItem(localStorage.getItem('devkey')+name);
