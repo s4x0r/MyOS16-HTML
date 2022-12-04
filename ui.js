@@ -174,7 +174,7 @@ async function getDevices(){
     //var data = await fetch(hudURL, options).then((response)=>response.json());
     for(let i in data){
         $("#deviceContainer").append(makeApp(
-            i['name'],
+            i.name,
             "icon",
             `localStorage.setItem('devkey', ${i.key});
                 localStorage.setItem('devname', ${i.name});
