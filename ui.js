@@ -170,8 +170,8 @@ async function getDevices(){
     $("#deviceContainer").empty($(".button"));
 
     send('hud:devices:get');
-    var data = await getPromiseFromEvent(window, 'message')
-    console.log(data)
+    var data = JSON.parse(await getPromiseFromEvent(window, 'message'));
+    console.log(data);
     //var data = await fetch(hudURL, options).then((response)=>response.json());
     for(let i in data){
         $("#deviceContainer").append(makeApp(
