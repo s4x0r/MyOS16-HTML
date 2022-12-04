@@ -102,7 +102,7 @@ async function init(){//innit bruv?
     setWP(wp);
 
     //make apps
-    $("#home").empty($(".dynamic"));
+    $("#home .dynamic").remove();
     for(i in data.apps){
         $("#home").append(makeApp(data[i].name, data[i].icon, data[i].action));
     }
@@ -117,7 +117,7 @@ async function init(){//innit bruv?
 
 
     //build wallpapers page
-    $("#wallpapers").empty(".dynamic");
+    $("#wallpapers .dynamic").remove();
     for(let i in data['wallpapers']){
         $("#wallpapers").append(`<p class="dynamic"
             onclick="send("dev:util:texture:${data[i].key}"); setWP(this.innerText);">
@@ -163,7 +163,7 @@ function setSize(size){
 
 
 async function getDevices(){
-    $("#deviceContainer").empty($(".button"));
+    $("#deviceContainer .button").remove();
 
     send('hud:devices:get');
     var data = JSON.parse(await getPromiseFromEvent(window, 'message'));
