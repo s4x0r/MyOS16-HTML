@@ -115,7 +115,7 @@ async function init(){//innit bruv?
     //make apps
     $("#home").empty($(".dynamic"));
     for(i in data['apps']){
-        $("#home").append(makeApp(i["name"], i["icon"], i["action"]));
+        $("#home").append(makeApp(i.name, i.icon, i.action));
     }
     
 
@@ -123,9 +123,8 @@ async function init(){//innit bruv?
     $("#wallpapers").empty(".dynamic");
     for(let i in data['wallpapers']){
         $("#wallpapers").append(`<p class="dynamic"
-            data-string="${getKey()}:util:texture:${i['key']}" 
-            onclick="send(this.getAttribute('data-string')); setWP(this.innerText);">
-            ${i['name']}
+            onclick="send("${getKey()}:util:texture:${i.key}"); setWP(this.innerText);">
+            ${i.name}
         </p>`);
     }
 
@@ -177,9 +176,9 @@ async function getDevices(){
         $("#deviceContainer").append(makeApp(
             i['name'],
             "icon",
-            `localStorage.setItem('devkey', ${i['key']});
-                localStorage.setItem('devname', ${i['name']});
-                localStorage.setItem('devid', ${i['id']});
+            `localStorage.setItem('devkey', ${i.key});
+                localStorage.setItem('devname', ${i.name});
+                localStorage.setItem('devid', ${i.id});
                 init();
             `
         ));
