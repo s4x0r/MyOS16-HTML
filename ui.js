@@ -1,9 +1,19 @@
 var hudURL;
 
+function getPromiseFromEvent(item, event) {
+    return new Promise((resolve) => {
+      const listener = (e) => {
+        item.removeEventListener(event, listener);
+        resolve(e.data);
+      }
+      item.addEventListener(event, listener);
+    })
+  }
+
 
 window.addEventListener('message', (event) => {         
     console.log(event.data);
-    hudURL=event.data;
+    //hudURL=event.data;
 }, false);
 
 $(document).ready(function() {
@@ -128,11 +138,13 @@ function send(data){
     console.log(data)
 
     if(data.startsWith('dev:')){data=getKey()+data.slice(4);}
-
+    window.parent.postMessage(data, "*");
+    /*
     var xhr = new XMLHttpRequest();
     xhr.open('POST', hudURL, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(data); 
+    xhr.send(data);
+    */ 
 }
 
 
@@ -158,14 +170,13 @@ async function getDevices(){
     $("#deviceContainer").empty($(".button"));
     const options = {
         method: 'POST',
-        mode: "cors",
         body: "hud:devices:get",
         headers: {
           'Content-Type': 'application/json'
         }      
     }
-
-    var data = await fetch(hudURL, options).then((response)=>response.json());
+    var data = await getPromiseFromEvent(window, 'message')
+    //var data = await fetch(hudURL, options).then((response)=>response.json());
     for(let i in data){
         $("#deviceContainer").append(makeApp(
             i['name'],

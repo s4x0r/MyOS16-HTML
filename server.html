@@ -9,19 +9,20 @@
     </style>
     <script>
         window.addEventListener('message', (event) => {
-            
-            
-            console.log(event.data);
-            /*
+            //console.log(event.data);
+
             var xhr = new XMLHttpRequest();
+            xhr.onload=function(){
+                document.getElementById("frame").contentWindow.postMessage(this.responseText, "*")
+            };
+
             xhr.open('POST', window.location.href, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify(event.data)); 
-            */
+            xhr.send(event.data); 
             
             
             
-          //event.data
+
     
         }, false);
     </script>
