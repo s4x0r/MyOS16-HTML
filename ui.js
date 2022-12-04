@@ -92,18 +92,18 @@ async function init(){//innit bruv?
     }
 
     //set wallpaper
-    var wp = localStorage.getItem('devkey')+'wp';
+    var wp = localStorage.getItem(localStorage.getItem('devkey')+'wp');
     if(wp===null){
         var loc = `devices/${localStorage.getItem('devid')}.json`;
         var data = await fetch(loc).then((response)=>response.json());
         //if(data['settings'].indexOf('wallpapers')==-1){show('home');return;}
-        wp = data['wallpapers'][0]['name'];
+        wp = data.wallpapers[0].name;
     }
     setWP(wp);
 
     //make apps
     $("#home").empty($(".dynamic"));
-    for(i in data['apps']){
+    for(i in data.apps){
         $("#home").append(makeApp(data[i].name, data[i].icon, data[i].action));
     }
     
@@ -120,7 +120,7 @@ async function init(){//innit bruv?
     $("#wallpapers").empty(".dynamic");
     for(let i in data['wallpapers']){
         $("#wallpapers").append(`<p class="dynamic"
-            onclick="send("${localStorage.getItem('devkey')}:util:texture:${data[i].key}"); setWP(this.innerText);">
+            onclick="send("dev:util:texture:${data[i].key}"); setWP(this.innerText);">
             ${data[i].name}
         </p>`);
     }
