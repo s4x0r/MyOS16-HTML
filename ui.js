@@ -60,22 +60,6 @@ async function init(){//innit bruv?
         show('devices');
         return;
     }
-    //set wallpaper
-    var wp = localStorage.getItem('devkey')+'wp';
-    if(wp===null){
-        var loc = `devices/${localStorage.getItem('devid')}.json`;
-        var data = await fetch(loc).then((response)=>response.json());
-        //if(data['settings'].indexOf('wallpapers')==-1){show('home');return;}
-        wp = data['wallpapers'][0]['name'];
-    }
-    setWP(wp);
-    
-    //set scale
-    if(localStorage.getItem('devkey')+'size'===null){
-        $('#size').val(0);
-    }else{
-        $('#size').val(localStorage.getItem('devkey')+'size');
-    }
 
 
     //get product data
@@ -107,12 +91,30 @@ async function init(){//innit bruv?
         data = await fetch(loc).then((response)=>response.json());
     }
 
+    //set wallpaper
+    var wp = localStorage.getItem('devkey')+'wp';
+    if(wp===null){
+        var loc = `devices/${localStorage.getItem('devid')}.json`;
+        var data = await fetch(loc).then((response)=>response.json());
+        //if(data['settings'].indexOf('wallpapers')==-1){show('home');return;}
+        wp = data['wallpapers'][0]['name'];
+    }
+    setWP(wp);
+
     //make apps
     $("#home").empty($(".dynamic"));
     for(i in data['apps']){
         $("#home").append(makeApp(data[i].name, data[i].icon, data[i].action));
     }
     
+    
+    //set scale
+    if(localStorage.getItem('devkey')+'size'===null){
+        $('#size').val(0);
+    }else{
+        $('#size').val(localStorage.getItem('devkey')+'size');
+    }
+
 
     //build wallpapers page
     $("#wallpapers").empty(".dynamic");
