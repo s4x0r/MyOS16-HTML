@@ -16,17 +16,7 @@
 
 </head>
 <body>
-    <div class="background" onload="show('home')" data-string="">
-        
-        <div id="wallpapers" class="listspace screen">
-            <p onclick="show('home')">Back</p>
-        </div>
-
-        <div id ="colors" class="autolist screen" >
-            <div style="width:100px;" id="mycolor" ></div>
-            <p onclick="show('home')">Back</p>
-
-        </div>
+    <div class="background">
 
         <div id="home" class="appspace screen">
             <div class="commandbar">
@@ -34,7 +24,7 @@
             </div>
 
             <div class="bottombar">
-                <div class="button" onclick="window.parent.location.href='google.com';">
+                <div class="button" onclick="window.parent.location.href='https:\/\/google.com';">
                     <img src="img/icon/globe_web_browser.png"/>
                     <p>Web</p>
                 </div>
@@ -48,6 +38,18 @@
                 </div>
             </div>
         </div>
+        
+        <div id="wallpapers" class="listspace screen">
+            <p onclick="show('home')">Back</p>
+        </div>
+
+        <div id ="colors" class="autolist screen" >
+            <div style="width:100px;" id="mycolor" ></div>
+            <p onclick="show('home')">Back</p>
+
+        </div>
+
+
 
         <div id="resize" class="screen appspace">
             <input type="range" id="size" 
