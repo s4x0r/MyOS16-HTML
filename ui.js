@@ -22,7 +22,7 @@ $(document).ready(function() {
     });
     
     $("#mycolor").on("change.color", function(event, color){
-        send(getKey()+":color:"+color);
+        send(localStorage.getItem('devkey')+":color:"+color);
     });
 
     const node = document.getElementById('cmdbar');
@@ -43,13 +43,6 @@ $(document).ready(function() {
     init();
 });
 
-function getKey(){//shorthand for getting active device key
-    return localStorage.getItem('devkey');
-}
-function getKey(name){//getkey()+name
-    return localStorage.getItem(localStorage.getItem('devkey')+name);
-}
-
 function makeApp(name, icon, action){
     return `
     <div class="button dynamic" 
@@ -62,13 +55,13 @@ function makeApp(name, icon, action){
 
 async function init(){//innit bruv?
     console.log(localStorage)
-    console.log(getKey());
-    if(getKey()===null){
+    console.log(localStorage.getItem('devkey'));
+    if(localStorage.getItem('devkey')===null){
         show('devices');
         return;
     }
     //set wallpaper
-    var wp = getKey('wp');
+    var wp = localStorage.getItem('devkey')+'wp';
     if(wp===null){
         var loc = `devices/${localStorage.getItem('devid')}.json`;
         var data = await fetch(loc).then((response)=>response.json());
@@ -78,16 +71,16 @@ async function init(){//innit bruv?
     setWP(wp);
     
     //set scale
-    if(getKey('size')===null){
+    if(localStorage.getItem('devkey')+'size'===null){
         $('#size').val(0);
     }else{
-        $('#size').val(getKey('size'));
+        $('#size').val(localStorage.getItem('devkey')+'size');
     }
 
 
     //get product data
     var data;
-    if(getKey()==="<key>"){//developer mode
+    if(localStorage.getItem('devkey')==="<key>"){//developer mode
         data={
             "prodID":"test",
             "apps":[
@@ -125,7 +118,7 @@ async function init(){//innit bruv?
     $("#wallpapers").empty(".dynamic");
     for(let i in data['wallpapers']){
         $("#wallpapers").append(`<p class="dynamic"
-            onclick="send("${getKey()}:util:texture:${data[i].key}"); setWP(this.innerText);">
+            onclick="send("${localStorage.getItem('devkey')}:util:texture:${data[i].key}"); setWP(this.innerText);">
             ${data[i].name}
         </p>`);
     }
@@ -138,7 +131,7 @@ async function init(){//innit bruv?
 function send(data){
     console.log(data)
 
-    if(data.startsWith('dev:')){data=getKey()+data.slice(4);}
+    if(data.startsWith('dev:')){data=localStorage.getItem('devkey')+data.slice(4);}
     window.parent.postMessage(data, "*");
     /*
     var xhr = new XMLHttpRequest();
@@ -159,11 +152,11 @@ function show(display){
 function setWP(wp){
     var r = document.querySelector(':root');
     r.style.setProperty('--bg', 'url("img/wp/'+wp+'.png")');
-    localStorage.setItem(getKey()+'wp', wp);
+    localStorage.setItem(localStorage.getItem('devkey')+'wp', wp);
 }
 function setSize(size){
-    localStorage.setItem(getKey()+'size', size);
-    send(`${getKey()}:util:resize:${Math.pow(2,this.value/100).toFixed(2)}`);
+    localStorage.setItem(localStorage.getItem('devkey')+'size', size);
+    send(`${localStorage.getItem('devkey')}:util:resize:${Math.pow(2,this.value/100).toFixed(2)}`);
 }
 
 
