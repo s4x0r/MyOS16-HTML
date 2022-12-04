@@ -54,8 +54,8 @@ function makeApp(name, icon, action){
 }
 
 async function init(){//innit bruv?
-    console.log(localStorage)
-    console.log(localStorage.getItem('devkey'));
+    //console.log(localStorage)
+    //console.log(localStorage.getItem('devkey'));
     if(localStorage.getItem('devkey')===null){
         show('devices');
         return;
@@ -90,7 +90,7 @@ async function init(){//innit bruv?
         var loc = `devices/${localStorage.getItem('devid')}.json`
         data = await fetch(loc).then((response)=>response.json());
     }
-    console.log(data);
+    //console.log(data);
     //set wallpaper
     var wp = localStorage.getItem(localStorage.getItem('devkey')+'wp');
     if(wp===null){
@@ -120,8 +120,8 @@ async function init(){//innit bruv?
     $("#wallpapers .dynamic").remove();
     for(let i in data.wallpapers){
         $("#wallpapers").append(`<p class="dynamic"
-            onclick="send("dev:util:texture:${data[i].key}"); setWP(this.innerText);">
-            ${data[i].name}
+            onclick="send("dev:util:texture:${data.wallpapers[i].key}"); setWP(this.innerText);">
+            ${data.wallpapers[i].name}
         </p>`);
     }
 
