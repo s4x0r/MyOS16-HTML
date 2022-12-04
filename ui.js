@@ -176,10 +176,10 @@ async function getDevices(){
         //console.log(i);
         $("#deviceContainer").append(makeApp(
             data[i].name,
-            "icon",
-            `localStorage.setItem('devkey', ${data[i].key});
-                localStorage.setItem('devname', ${data[i].name});
-                localStorage.setItem('devid', ${data[i].id});
+            "tablet_smart_phone.png",
+            `localStorage.setItem('devkey', '${data[i].key}');
+                localStorage.setItem('devname', '${data[i].name}');
+                localStorage.setItem('devid', '${data[i].id}');
                 init();
             `
         ));
