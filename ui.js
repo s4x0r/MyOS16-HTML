@@ -104,7 +104,7 @@ async function init(){//innit bruv?
     //make apps
     $("#home .dynamic").remove();
     for(i in data.apps){
-        $("#home").append(makeApp(data[i].name, data[i].icon, data[i].action));
+        $("#home").append(makeApp(data.apps[i].name, data.apps[i].icon, data.apps[i].action));
     }
     
     
