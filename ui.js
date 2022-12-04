@@ -104,7 +104,7 @@ async function init(){//innit bruv?
     //make apps
     $("#home .dynamic").remove();
     for(i in data.apps){
-        $("#home").append(makeApp(i.name, i.icon, i.action));
+        $("#home").append(makeApp(data[i].name, data[i].icon, data[i].action));
     }
     
     
@@ -118,7 +118,7 @@ async function init(){//innit bruv?
 
     //build wallpapers page
     $("#wallpapers .dynamic").remove();
-    for(let i in data['wallpapers']){
+    for(let i in data.wallpapers){
         $("#wallpapers").append(`<p class="dynamic"
             onclick="send("dev:util:texture:${data[i].key}"); setWP(this.innerText);">
             ${data[i].name}
