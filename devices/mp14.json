@@ -2,7 +2,7 @@
     "prodID":"mp14",
     "apps":[
         {"name":"Wallpapers",
-        "icon":"",
+        "icon":"picture.png",
         "action":"show('wallpapers');"
         },
         {"name":"Resize",
@@ -10,7 +10,7 @@
         "action":"show('resize');"
         },
         {"name":"Colors",
-        "icon":"",
+        "icon":"color_colour_palette_paint_brush.png",
         "action":"show('colors');"
         },
         {"name":"Toggle Idle AO",

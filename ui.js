@@ -22,7 +22,7 @@ $(document).ready(function() {
     });
     
     $("#mycolor").on("change.color", function(event, color){
-        send(localStorage.getItem('devkey')+":color:"+color);
+        send("dev:util:color:"+color);
     });
 
     const node = document.getElementById('cmdbar');
@@ -112,7 +112,7 @@ async function init(){//innit bruv?
     if(localStorage.getItem('devkey')+'size'===null){
         $('#size').val(0);
     }else{
-        $('#size').val(localStorage.getItem('devkey')+'size');
+        $('#size').val(localStorage.getItem(localStorage.getItem('devkey')+'size'));
     }
 
 
@@ -155,10 +155,7 @@ function setWP(wp){
     r.style.setProperty('--bg', 'url("img/wp/'+wp+'.png")');
     localStorage.setItem(localStorage.getItem('devkey')+'wp', wp);
 }
-function setSize(size){
-    localStorage.setItem(localStorage.getItem('devkey')+'size', size);
-    send(`${localStorage.getItem('devkey')}:util:resize:${Math.pow(2,this.value/100).toFixed(2)}`);
-}
+
 
 
 async function getDevices(){

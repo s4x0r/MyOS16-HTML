@@ -53,10 +53,10 @@
             <input type="range" id="size" 
                 min="-300" max="300" 
                 style="grid-column: 1/span 3;" 
-                onchange="document.getElementById('sizeDisplay').innerText=Math.pow(2,this.value/100).toFixed(2);"
+                onchange="document.getElementById('sizeDisplay').innerText=Math.pow(2,this.value/100).toFixed(3);"
             >
             <div id="sizeDisplay" style="grid-column: 1/span 3;">none</div>
-            <div class="button" onclick="setSize(document.getElementById('size').value)">
+            <div class="button" onclick="send('dev:util:resize:'+$('#sizeDisplay').text());localStorage.setItem(localStorage.getItem('devid')+'size'($('#size').val()));">
                 <img src="img/icon/settings_cog_gear.png"/>
                 <p>Set size</p>
             </div>
@@ -66,7 +66,7 @@
             </div>
 
         </div>
-        
+
         <div id="devices" class="appspace screen">
 
             <div class="button" onclick="show('home')">
