@@ -131,9 +131,8 @@ async function init(){//innit bruv?
 
 
 function send(data){
-    console.log(data)
-
-    if(data.startsWith('dev:')){data=localStorage.getItem('devkey')+data.slice(4);}
+    if(data.startsWith('dev:')){data=localStorage.getItem('devkey')+":"+data.slice(4);}
+    console.log(data);
     window.parent.postMessage(data, "*");
     /*
     var xhr = new XMLHttpRequest();
