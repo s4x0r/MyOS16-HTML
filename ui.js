@@ -66,24 +66,24 @@ async function init(){//innit bruv?
     var data;
     if(localStorage.getItem('devkey')==="<key>"){//developer mode
         data={
-            prodID:"test",
-            apps:[
-                {name:"Wallpapers",
-                icon:"",
-                action:"show('wallpapers');"
+            "prodID":"test",
+            "apps":[
+                {"name":"Wallpapers",
+                "icon":"",
+                "action":"show('wallpapers');"
                 },
-                {name:"Resize",
-                icon:"",
-                action:"show('resize');"
+                {"name":"Resize",
+                "icon":"",
+                "action":"show('resize');"
                 },
-                {name:"Colors",
-                icon:"",
-                action:"show('colors');"
+                {"name":"Colors",
+                "icon":"",
+                "action":"show('colors');"
                 }
             ],
-            wallpapers:[
-                {name:"14WP-1",key:"d5c57d25-9f9c-c99e-8007-aee26d5832cd"},
-                {name:"14WP-2",key:"01583bba-793c-137c-f992-71096887efa2"}
+            "wallpapers":[
+                {"name":"14WP-1","key":"d5c57d25-9f9c-c99e-8007-aee26d5832cd"},
+                {"name":"14WP-2","key":"01583bba-793c-137c-f992-71096887efa2"}
             ]
         };
     }else{
@@ -143,11 +143,11 @@ function send(data){
 }
 
 
-function show(screen){
+function show(display){
     for(let i = 0; i<document.getElementsByClassName('screen').length; i++){
         document.getElementsByClassName('screen')[i].style.display='none';
         }
-    document.getElementById(screen).style.display='';
+    document.getElementById(display).style.display='';
 }
 
 function setWP(wp){
