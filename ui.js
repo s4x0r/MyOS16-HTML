@@ -53,6 +53,13 @@ function makeApp(name, icon, action){
     </div>`;
 }
 
+function setDevMode(){//develeper mode
+    localStorage.setItem('devkey', '<key>');
+    localStorage.setItem('devname', 'devmode');
+    localStorage.setItem('devid', 'devmode');
+    init();
+}
+
 async function init(){//innit bruv?
     //console.log(localStorage)
     //console.log(localStorage.getItem('devkey'));
@@ -64,32 +71,10 @@ async function init(){//innit bruv?
 
     //get product data
     var data;
-    if(localStorage.getItem('devkey')==="<key>"){//developer mode
-        data={
-            "prodID":"test",
-            "apps":[
-                {"name":"Wallpapers",
-                "icon":"",
-                "action":"show('wallpapers');"
-                },
-                {"name":"Resize",
-                "icon":"",
-                "action":"show('resize');"
-                },
-                {"name":"Colors",
-                "icon":"",
-                "action":"show('colors');"
-                }
-            ],
-            "wallpapers":[
-                {"name":"14WP-1","key":"d5c57d25-9f9c-c99e-8007-aee26d5832cd"},
-                {"name":"14WP-2","key":"01583bba-793c-137c-f992-71096887efa2"}
-            ]
-        };
-    }else{
-        var loc = `devices/${localStorage.getItem('devid')}.json`
-        data = await fetch(loc).then((response)=>response.json());
-    }
+ 
+    var loc = `devices/${localStorage.getItem('devid')}.json`
+    data = await fetch(loc).then((response)=>response.json());
+
     //console.log(data);
     //set wallpaper
     var wp = localStorage.getItem(localStorage.getItem('devkey')+'wp');
@@ -155,8 +140,6 @@ function setWP(wp){
     r.style.setProperty('--bg', 'url("img/wp/'+wp+'.png")');
     localStorage.setItem(localStorage.getItem('devkey')+'wp', wp);
 }
-
-
 
 async function getDevices(){
     $("#deviceContainer .button").remove();
