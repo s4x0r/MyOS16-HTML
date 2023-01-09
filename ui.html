@@ -2,7 +2,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy" 
-        content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval';">
+        content="default-src 'self'; 
+            script-src 'self' https://ajax.googleapis.com https://app.korete.ch; 
+            style-src 'self' https://fonts.googleapis.com; 
+            media-src 'self' https://app.korete.ch;"
+    >
 
     <link rel="stylesheet" href="ui.css">
 

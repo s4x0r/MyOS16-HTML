@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';"/>
-    <style>
-        body{
-            background-color: black;
-        }
-    </style>
+   
     <script>
         window.addEventListener('message', (event) => {
             //console.log(event.data);
@@ -22,9 +17,9 @@
         }, false);
     </script>
 </head>
-<body>
-<embed src='ui.html' width='100%' height='500'>
-</embed>
+<body style="background-color: black;">
+<iframe src="ui.html" width="280px" height="615px" style="border: 0; background-color: black;">
+</iframe>
 
 </body>
 <footer>

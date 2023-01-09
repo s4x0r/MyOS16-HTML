@@ -1,21 +1,24 @@
 :root{
     --bg: url('img/wp/14WP-1.png');
+    --h: 597px;
+    --w: 270px;
 }
 .background{
-    max-width :270px;
-    height: 480px;
-    max-height: 480px;
+    max-width :var(--w);
+    height: var(--h);
+    max-height: var(--h);
 
     background-image: var(--bg);
     background-position: center;
     background-size:cover;
     overflow: hidden;
     position: relative;
+    border-radius: 20px;
 }
 .screen{
-    max-width :270px;
-    height: 480px;
-    max-height: 480px;
+    max-width :var(--w);
+    height: var(--h);
+    max-height: var(--h);
 }
 .float{
     visibility: hidden;
@@ -106,7 +109,7 @@
 }
 .bottombar{
     grid-column: 1 / span 4;
-    grid-row: 6;
+    grid-row: 8;
     height: 70px;
     width: inherit;
     margin : 10px;
