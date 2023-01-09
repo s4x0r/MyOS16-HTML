@@ -53,10 +53,10 @@ function makeApp(name, icon, action){
     </div>`;
 }
 
-function setDevMode(){//develeper mode
-    localStorage.setItem('devkey', '<key>');
-    localStorage.setItem('devname', 'devmode');
-    localStorage.setItem('devid', 'devmode');
+function setDevMode(id){//develeper mode
+    localStorage.setItem('devkey', id+'dev');
+    localStorage.setItem('devname', id);
+    localStorage.setItem('devid', id);
     init();
 }
 

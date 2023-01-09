@@ -2,15 +2,15 @@
     "prodID":"test",
     "apps":[
         {"name":"Wallpapers",
-        "icon":"",
+        "icon":"picture.png",
         "action":"show('wallpapers');"
         },
         {"name":"Resize",
-        "icon":"",
+        "icon":"thin_arrows_fullscreen_directions_full_screen.png",
         "action":"show('resize');"
         },
         {"name":"Colors",
-        "icon":"",
+        "icon":"color_colour_palette_paint_brush.png",
         "action":"show('colors');"
         }
     ],
