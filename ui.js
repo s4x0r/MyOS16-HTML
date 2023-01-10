@@ -105,7 +105,7 @@ async function init(){//innit bruv?
     $("#wallpapers .dynamic").remove();
     for(let i in data.wallpapers){
         $("#wallpapers").append(`<p class="dynamic" 
-            style="background-image: url("${data.wallpapers[i]}");
+            style="background-image: url('img/wp/${data.wallpapers[i].name}');
                 background-size: cover;
             ";
             onclick="send('dev:util:texture:${data.wallpapers[i].key}'); setWP(this.innerText);">
