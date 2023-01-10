@@ -72,7 +72,7 @@
 
 }
 .listspace p{
-    border: 2px rgba(64, 64, 64, 0.69);
+    border: 2px black;
 }
 .autolist{
     display :grid;
